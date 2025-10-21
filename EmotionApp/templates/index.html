@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal Emotion Analysis</title>
+    <link href="/static/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Apply the Nunito font as the default */
+        body { font-family: 'Nunito', sans-serif; }
+    </style>
+</head>
+<body class="bg-beige-bg text-brown-text font-sans min-h-screen flex flex-col items-center py-10 px-4">
+
+    <h1 class="text-4xl font-bold text-brown-text mb-4">Emotion Analysis</h1>
+
+    <p class="font-cursive text-xl text-brown-light mb-8">"All feelings are valid and important."</p>
+
+    <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 border border-gray-200 mb-8">
+
+        <h2 class="text-2xl font-semibold mb-6">How are you feeling?</h2>
+
+        <div class="flex flex-col md:flex-row gap-6 mb-6">
+            <div class="w-full md:w-1/2">
+                <label for="text_input" class="block text-sm font-medium mb-1">Text</label>
+                <textarea id="text_input" rows="4" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-brown-accent focus:outline-none" placeholder="Share your thoughts..."></textarea>
+            </div>
+
+            <div class="w-full md:w-1/2 flex flex-col gap-6">
+                <div>
+                    <label for="image_input" class="block text-sm font-medium mb-1">Image</label>
+                    <input id="image_input" type="file" accept="image/*" class="w-full text-sm text-slate-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-lg file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-beige-bg file:text-brown-accent
+                        hover:file:bg-opacity-80 cursor-pointer"/>
+                </div>
+                <div id="audio_section">
+                    <label for="audio_input" class="block text-sm font-medium mb-1">Audio</label>
+                    <input id="audio_input" type="file" accept="audio/*" class="w-full text-sm text-slate-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-lg file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-beige-bg file:text-brown-accent
+                        hover:file:bg-opacity-80 cursor-pointer"/>
+                </div>
+            </div>
+        </div>
+
+        <button id="analyze_btn" class="w-full py-3 px-4 bg-brown-accent text-white rounded-lg font-bold text-lg hover:bg-brown-light transition-colors">
+            Analyze
+        </button>
+        <p id="loading_spinner" class="text-center mt-4 hidden">Analyzing...</p>
+
+    </div> <div id="results_section" class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-8 border border-gray-200 mb-8 hidden">
+
+        <h2 class="text-2xl font-semibold mb-4">Results</h2>
+
+        <div class="text-center bg-beige-bg p-4 rounded-lg mb-6">
+            <h3 class="text-sm font-medium uppercase text-brown-light">Final Prediction</h3>
+            <p id="final_prediction" class="text-4xl font-bold text-brown-text">-</p>
+        </div>
+
+        <h3 class="text-lg font-semibold mb-4">Modality Breakdown</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="mb-2 relative h-64 w-full">
+                <p class="font-medium text-center">Text Model</p>
+                <canvas id="text_chart"></canvas>
+            </div>
+            <div class="mb-2 relative h-64 w-full">
+                <p class="font-medium text-center">Image Model</p>
+                <canvas id="image_chart"></canvas>
+            </div>
+            <div class="mb-2 relative h-64 w-full" id="audio_chart_container">
+                <p class="font-medium text-center">Audio Model</p>
+                <canvas id="audio_chart"></canvas>
+            </div>
+        </div>
+
+    </div> <script src="/static/script.js"></script>
+</body>
+</html>
